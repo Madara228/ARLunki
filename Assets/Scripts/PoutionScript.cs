@@ -9,9 +9,9 @@ namespace LiquidVolumeFX
         bool isTouch;
         public Text t;
         Lunka currentLunka;
-        private void Update()
+        private void LateUpdate()
         {
-            t.text += transform.position.ToString() + "\n";
+            UIDebug.Log(transform.position);
             if (Input.touchCount>0)
             {
                 isTouch = true;

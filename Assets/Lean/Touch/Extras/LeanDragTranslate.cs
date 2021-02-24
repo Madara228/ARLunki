@@ -146,8 +146,9 @@ namespace Lean.Touch
 				// Add the deltaPosition
 				screenPoint += (Vector3)screenDelta;
 
-				// Convert back to world space
-				transform.position = camera.ScreenToWorldPoint(screenPoint);
+				// Convert back to world space	
+				var p = camera.ScreenToWorldPoint(screenPoint);
+				transform.position = new Vector3(p.x, transform.position.y, p.z);
 			}
 			else
 			{

@@ -9,6 +9,7 @@ namespace LiquidVolumeFX
         bool isTouch;
         public Text t;
         Lunka currentLunka;
+
         private void LateUpdate()
         {
             UIDebug.Log(transform.position);
@@ -31,12 +32,12 @@ namespace LiquidVolumeFX
         }
         private IEnumerator check(Collider other)
         {
-            yield return new WaitForSeconds(0.1f);
-            if (!isTouch)
-            {
+            yield return new WaitForSeconds(0.01f);
+            //if (!isTouch)
+            //{
                 currentLunka = other.gameObject.GetComponent<Lunka>();
                 StartCoroutine(fill());
-            }
+            //}
         }
         private IEnumerator fill()
         {

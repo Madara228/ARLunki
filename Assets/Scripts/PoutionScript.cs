@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 namespace LiquidVolumeFX
 {
     public class PoutionScript : MonoBehaviour
     {
         bool isTouch;
+        public Text t;
         Lunka currentLunka;
         private void Update()
         {
+            t.text += transform.position.ToString() + "\n";
             if (Input.touchCount>0)
             {
                 isTouch = true;
@@ -19,6 +21,7 @@ namespace LiquidVolumeFX
                 isTouch = false;
             }
         }
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.GetComponent<Lunka>())

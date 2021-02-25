@@ -50,8 +50,8 @@ MeshRenderer:
   m_GameObject: {fileID: 7543251932279205788}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -96,24 +96,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topology: 1
   _detail: 10
-  _level: 0.081
+  _level: 0.877
   _liquidColor1: {r: 0, g: 0.860724, b: 1, a: 0.4117647}
   _liquidScale1: 1
   _liquidColor2: {r: 0.03146139, g: 0.92604125, b: 0.9528302, a: 0}
   _liquidScale2: 5
-  _alpha: 1
+  _alpha: 0
   _emissionColor: {r: 0, g: 0, b: 0, a: 1}
   _emissionBrightness: 0
-  _ditherShadows: 1
+  _ditherShadows: 0
   _murkiness: 1
-  _turbulence1: 0.5
+  _turbulence1: 0.011
   _turbulence2: 0.2
   _frecuency: 1
   _speed: 1
   _sparklingIntensity: 0.1
   _sparklingAmount: 0.2
   _deepObscurance: 2
-  _foamColor: {r: 0.0009765625, g: 0.0009765625, b: 0.0009765625, a: 0.65}
+  _foamColor: {r: 0, g: 0, b: 0, a: 0.65}
   _foamScale: 0.01
   _foamThickness: 0
   _foamDensity: -1

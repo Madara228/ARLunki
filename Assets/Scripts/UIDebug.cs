@@ -58,7 +58,7 @@ public class UIDebug : MonoBehaviour
 
 	public static void Log(object line)
 	{
-#if true
+#if false
 		getInstance().printText("[" + Time.time.ToString("0.0") + "] " + line.ToString());
 #else
 		Debug.Log("UIDebug is disable. " + "[" + Time.time.ToString("0.0") + "] " + line.ToString());

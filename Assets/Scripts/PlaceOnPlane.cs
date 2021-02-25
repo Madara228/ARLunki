@@ -28,6 +28,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set { m_PlacedPrefab = value; }
         }
 
+        ARPlaneManager m_ARPlaneManager;
         /// <summary>
         /// The object instantiated as a result of a successful raycast intersection with a plane.
         /// </summary>
@@ -36,6 +37,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void Awake()
         {
             m_RaycastManager = GetComponent<ARRaycastManager>();
+            m_ARPlaneManager = GetComponent<ARPlaneManager>();
         }
 
         bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -61,10 +63,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
                 if (spawnedObject == null)
                 {
-                    spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                    spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, Quaternion.identity);
+                    SetAllPlanesActive(false);
                     Destroy(this.GetComponent<PlaceOnPlane>());
                 }
             }
+        }
+        void SetAllPlanesActive(bool value)
+        {
+            foreach (var plane in m_ARPlaneManager.trackables)
+                plane.gameObject.SetActive(value);
         }
 
         static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();

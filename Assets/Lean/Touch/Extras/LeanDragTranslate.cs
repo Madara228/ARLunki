@@ -1,5 +1,4 @@
 using UnityEngine;
-
 namespace Lean.Touch
 {
 	/// <summary>This component allows you to translate the current GameObject relative to the camera using the finger drag gesture.</summary>
@@ -70,8 +69,9 @@ namespace Lean.Touch
 			// Calculate the screenDelta value based on these fingers
 			var screenDelta = LeanGesture.GetScreenDelta(fingers);
 
-			if (screenDelta != Vector2.zero)
+			if (screenDelta != Vector2.zero && fingers.Count == 1)
 			{
+				Debug.Log("LT");
 				// Perform the translation
 				if (transform is RectTransform)
 				{

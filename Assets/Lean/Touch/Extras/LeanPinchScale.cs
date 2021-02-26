@@ -1,5 +1,4 @@
 using UnityEngine;
-
 namespace Lean.Touch
 {
 	/// <summary>This component allows you to scale the current GameObject relative to the specified camera using the pinch gesture.</summary>
@@ -36,6 +35,7 @@ namespace Lean.Touch
 		[SerializeField]
 		private Vector3 remainingScale;
 
+		//public LeanDragTranslate lt;
 		/// <summary>If you've set Use to ManuallyAddedFingers, then you can call this method to manually add a finger.</summary>
 		public void AddFinger(LeanFinger finger)
 		{
@@ -77,6 +77,7 @@ namespace Lean.Touch
 
 			if (pinchScale != 1.0f)
 			{
+
 				pinchScale = Mathf.Pow(pinchScale, Sensitivity);
 
 				// Perform the translation if this is a relative scale
@@ -87,6 +88,8 @@ namespace Lean.Touch
 					if (transform is RectTransform)
 					{
 						TranslateUI(pinchScale, pinchScreenCenter);
+
+
 					}
 					else
 					{
@@ -98,6 +101,10 @@ namespace Lean.Touch
 
 				remainingScale += transform.localPosition - oldScale;
 			}
+            else
+            {
+				//lt.enabled = true;
+            }
 
 			// Get t value
 			var factor = LeanTouch.GetDampenFactor(Dampening, Time.deltaTime);
@@ -150,6 +157,7 @@ namespace Lean.Touch
 			if (camera != null)
 			{
 				// Screen position of the transform
+				//lt.enabled = false;
 				var screenPosition = camera.WorldToScreenPoint(transform.position);
 
 				// Push the screen position away from the reference point based on the scale

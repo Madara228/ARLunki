@@ -73,6 +73,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             foreach (var plane in m_ARPlaneManager.trackables)
                 plane.gameObject.SetActive(value);
+            m_ARPlaneManager.planePrefab = null;
         }
 
         static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();

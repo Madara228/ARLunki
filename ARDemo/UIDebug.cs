@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace ARDemo
+{
 	public class UIDebug : MonoBehaviour
 	{
 		private static UIDebug instance;
@@ -61,15 +63,9 @@ using UnityEngine.UI;
 #if false
 		getInstance().printText("[" + Time.time.ToString("0.0") + "] " + line.ToString());
 #else
-			//Debug.Log("UIDebug is disable. " + "[" + Time.time.ToString("0.0") + "] " + line.ToString());
+			Debug.Log("UIDebug is disable. " + "[" + Time.time.ToString("0.0") + "] " + line.ToString());
 #endif
 		}
 	}
-	public static class Caller
-	{
-		public static void Log(object line)
-		{
-			UIDebug.Log(line);
-		}
-	}
+}
 

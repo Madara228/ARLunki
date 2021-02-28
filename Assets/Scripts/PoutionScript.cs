@@ -2,52 +2,72 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using Lean.Touch;
 namespace LiquidVolumeFX
 {
     public class PoutionScript : MonoBehaviour
     {
         bool isTouch;
         public Text t;
-        Lunka currentLunka;
-
+        [SerializeField] Lunka currentLunka;
+        public List<Lunka> collider_list;
+        bool spilling;
         private void LateUpdate()
         {
-            UIDebug.Log(transform.position);
-            if (Input.touchCount>0)
+            float min_dist = Vector3.Distance(transform.position, collider_list[0].transform.position);
+            foreach(var lunka in collider_list)
             {
-                isTouch = true;
-            }
-            else
-            {
-                isTouch = false;
-            }
+                if (Vector3.Distance(transform.position, lunka.transform.position)<min_dist && currentLunka !=lunka && !spilling)
+                {
+                    if (currentLunka != null) currentLunka._visible.SetActive(false);
+                    currentLunka = lunka;
+                    currentLunka._visible.SetActive(true);
+                }
+            }            
+        }
+        public void FillObject()
+        {
+            transform.DOMove(new Vector3(currentLunka.transform.position.x, transform.position.y, currentLunka.transform.position.z), 1f);
+            currentLunka._visible.SetActive(false);
+            StartCoroutine(fill());
         }
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponent<Lunka>())
+            if (other.gameObject.GetComponent<Lunka>() && !collider_list.Contains(other.gameObject.GetComponent<Lunka>()))
             {
-                StartCoroutine(check(other));
+                collider_list.Add(other.gameObject.GetComponent<Lunka>());
             }
         }
-        private IEnumerator check(Collider other)
+        private void OnTriggerExit(Collider other)
         {
-            yield return new WaitForSeconds(0.01f);
-            //if (!isTouch)
-            //{
-                currentLunka = other.gameObject.GetComponent<Lunka>();
-                StartCoroutine(fill());
-            //}
+            if (other.gameObject.GetComponent<Lunka>())
+            {
+                if (collider_list.Contains(currentLunka) && other.gameObject.GetComponent<Lunka>() ==currentLunka)
+                {
+                    currentLunka._visible.SetActive(false);
+                    currentLunka = null;
+                }
+                collider_list.Remove(other.gameObject.GetComponent<Lunka>());
+                
+            }
         }
         private IEnumerator fill()
         {
-            Debug.Log("fill");  
-            yield return new WaitForSeconds(0.1f);
+            spilling = true;
+            this.GetComponent<LeanDragTranslate>().enabled = false;
             while (currentLunka.GetComponentInChildren<LiquidVolume>().level <0.9f)
             {
                 currentLunka.GetComponentInChildren<LiquidVolume>().level += 0.01F;
                 yield return new WaitForEndOfFrame();
-            }   
+            }
+            yield return new WaitForSeconds(2f);
+            Destroy(currentLunka.gameObject.GetComponent<BoxCollider>());
+            currentLunka._visible.SetActive(false);
+            currentLunka = null;
+            this.GetComponent<LeanDragTranslate>().enabled = true;
+            spilling = false;
         }
     }
 }

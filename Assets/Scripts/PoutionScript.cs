@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Lean.Touch;
+
 namespace LiquidVolumeFX
 {
     public class PoutionScript : MonoBehaviour
@@ -12,6 +13,7 @@ namespace LiquidVolumeFX
         public Text t;
         [SerializeField] Lunka currentLunka;
         public List<Lunka> collider_list;
+
         bool spilling;
         private void LateUpdate()
         {
@@ -52,6 +54,10 @@ namespace LiquidVolumeFX
                 collider_list.Remove(other.gameObject.GetComponent<Lunka>());
                 
             }
+        }
+        private void OnTriggerStay(Collider other)
+        {
+            t.text = "Уровень жидкости " + currentLunka.GetComponentInChildren<LiquidVolume>().level*100f + "%";
         }
         private IEnumerator fill()
         {

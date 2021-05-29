@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -27,7 +28,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             get { return m_PlacedPrefab; }
             set { m_PlacedPrefab = value; }
         }
-
+        
         ARPlaneManager m_ARPlaneManager;
         /// <summary>
         /// The object instantiated as a result of a successful raycast intersection with a plane.

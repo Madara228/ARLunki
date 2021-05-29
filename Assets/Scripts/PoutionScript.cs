@@ -17,9 +17,13 @@ namespace LiquidVolumeFX
         public List<Lunka> collider_list;
         Coroutine _fillenumerator;
         bool spilling;
+        [SerializeField] private List<Lunka> filled = new List<Lunka>();
+        private void Start()
+        {
+            MessageBehaivour.Call("Необходимо заполнить 10 лунок на 70-80%", MessageType.Notification);
+        }
 
-
-
+        
         #region BeginTapAndEndTap
         /// <summary>
         //реализация работы наполнения сосуда жидкости через зажатие на кнопку
@@ -27,26 +31,48 @@ namespace LiquidVolumeFX
         /// </summary>
         public void StartFillObject()
         {
-            transform.DOMove(new Vector3(currentLunka.transform.position.x, transform.position.y, currentLunka.transform.position.z), 1f);
-            #region oldcode
-            //currentLunka._visible.SetActive(false);
-            //StartCoroutine(fill());
-            #endregion
-            _fillenumerator = StartCoroutine(filling());
+            if (currentLunka != null)
+            {
+                transform.DOMove(new Vector3(currentLunka.transform.position.x, transform.position.y, currentLunka.transform.position.z), 1f);
+                #region oldcode
+                //currentLunka._visible.SetActive(false);
+                //StartCoroutine(fill());
+                #endregion
+                _fillenumerator = StartCoroutine(filling());
+            }
         }
         public void StopFilling()
         {
             StopCoroutine(_fillenumerator);
+            if (!(lv.level > 0.7f && lv.level < 0.8f))
+            {
+                MessageBehaivour.Call("Ошибка", MessageType.Error);
+                if(!filled.Contains(currentLunka))
+                    filled.Add(currentLunka);
+                if (filled.Count >= 10)
+                {
+                    foreach (var fil in filled)
+                    {
+                        if(!(fil.GetComponent<LiquidVolume>().level>0.7f && fil.GetComponent<LiquidVolume>().level<0.8f))
+                            MessageBehaivour.Call("Задание выполнено не полностью!", MessageType.Notification);
+                        break;
+                    }
+                    MessageBehaivour.Call("Задание выполнено!", MessageType.Notification);
+                }
+            }
         }
         private IEnumerator filling()
         {
             while (true)
             {
                 yield return new WaitForEndOfFrame();
-                lv.level += 0.005f;
+                lv.level += 0.008f;
             }
         }
         #endregion
+        
+        
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.GetComponent<Lunka>() && !collider_list.Contains(other.gameObject.GetComponent<Lunka>()))
@@ -83,7 +109,7 @@ namespace LiquidVolumeFX
             try
             {
                 if (currentLunka.gameObject != null)
-                    t.text = "Уровень жидкости " + currentLunka.GetComponentInChildren<LiquidVolume>().level * 100f + "%";
+                    t.text = "Уровень жидкости " + (int)Mathf.Round(currentLunka.GetComponentInChildren<LiquidVolume>().level * 100f) + "%";
             }
             catch(Exception e)
             {
@@ -91,22 +117,6 @@ namespace LiquidVolumeFX
             }
 
         }
-        
-        //private IEnumerator fill()
-        //{
-        //    spilling = true;
-        //    this.GetComponent<LeanDragTranslate>().enabled = false;
-        //    while (currentLunka.GetComponentInChildren<LiquidVolume>().level <0.9f)
-        //    {
-        //        currentLunka.GetComponentInChildren<LiquidVolume>().level += 0.01F;
-        //        yield return new WaitForEndOfFrame();
-        //    }
-        //    yield return new WaitForSeconds(2f);
-        //    Destroy(currentLunka.gameObject.GetComponent<BoxCollider>());
-        //    currentLunka._visible.SetActive(false);
-        //    currentLunka = null;
-        //    this.GetComponent<LeanDragTranslate>().enabled = true;
-        //    spilling = false;
-        //}
+       
     }
 }

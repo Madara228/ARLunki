@@ -67,6 +67,7 @@ namespace LiquidVolumeFX
             {
                 yield return new WaitForEndOfFrame();
                 lv.level += 0.008f;
+                lv.level = Mathf.Clamp(lv.level,0f, 0.92f);
             }
         }
         #endregion

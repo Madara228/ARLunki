@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _topology: 1
-  _detail: 10
-  _level: 0.1
+  _detail: 0
+  _level: 0
   _liquidColor1: {r: 0.22327036, g: 1, b: 0.81583786, a: 0.1}
   _liquidScale1: 1
   _liquidColor2: {r: 0, g: 0.63328767, b: 1, a: 0.3}
@@ -201,10 +201,10 @@ MonoBehaviour:
   _emissionBrightness: 0
   _ditherShadows: 0
   _murkiness: 1
-  _turbulence1: 0.37
-  _turbulence2: 0.2
+  _turbulence1: 0
+  _turbulence2: 0
   _frecuency: 0.4
-  _speed: 1.01
+  _speed: 0
   _sparklingIntensity: 0.1
   _sparklingAmount: 0.2
   _deepObscurance: 2

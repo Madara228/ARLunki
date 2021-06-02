@@ -44,7 +44,7 @@ namespace LiquidVolumeFX
         public void StopFilling()
         {
             StopCoroutine(_fillenumerator);
-            if (!(lv.level > 0.7f && lv.level < 0.8f))
+            if (!(lv.level > 0.8f))
             {
                 MessageBehaivour.Call("Ошибка", MessageType.Error);
                 if(!filled.Contains(currentLunka))
@@ -53,7 +53,7 @@ namespace LiquidVolumeFX
                 {
                     foreach (var fil in filled)
                     {
-                        if(!(fil.GetComponent<LiquidVolume>().level>0.7f && fil.GetComponent<LiquidVolume>().level<0.8f))
+                        if(!(fil.GetComponent<LiquidVolume>().level>0.8f))
                             MessageBehaivour.Call("Задание выполнено не полностью!", MessageType.Notification);
                         break;
                     }

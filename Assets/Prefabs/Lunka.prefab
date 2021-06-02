@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _topology: 1
-  _detail: 0
+  _detail: 10
   _level: 0
   _liquidColor1: {r: 0.22327036, g: 1, b: 0.81583786, a: 0.1}
   _liquidScale1: 1
@@ -223,7 +223,7 @@ MonoBehaviour:
   _upperLimit: 1
   _flaskTint: {r: 0, g: 0, b: 0, a: 1}
   _flaskThickness: 0
-  _flaskGlossinessExternal: 0
+  _flaskGlossinessExternal: 0.1
   _flaskGlossinessInternal: 0.04
   _scatteringEnabled: 0
   _scatteringPower: 5
@@ -253,7 +253,7 @@ MonoBehaviour:
   _allowViewFromInside: 0
   _debugSpillPoint: 0
   _renderQueue: 3001
-  _reflectionTexture: {fileID: 0}
+  _reflectionTexture: {fileID: 8900000, guid: a730bb546543847cfb568b69de54fdbb, type: 2}
   _physicsMass: 1
   _physicsAngularDamp: 0.046
   liqMat: {fileID: 0}

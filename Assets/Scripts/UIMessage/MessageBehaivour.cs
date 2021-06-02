@@ -23,7 +23,7 @@ using UnityEngine.UI;using Random = UnityEngine.Random;
         private GameObject messagePrefab;
 
         [SerializeField]
-        private GameObject errorPrefab;
+        private GameObject errorPrefab; 
         
         private GameObject messageText;
         private GameObject errorText;
@@ -56,12 +56,12 @@ using UnityEngine.UI;using Random = UnityEngine.Random;
 
         private IEnumerator returner(GameObject obj)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(4f);
             returnBack(obj);
         }
         void returnBack(GameObject obj)
         {
-            obj.transform.DOScale(Vector3.zero, 0.3f);
+            obj.transform.DOScale(Vector3.zero, 0.5f);
         }
         public static void Call(string text, MessageType type)
         {
